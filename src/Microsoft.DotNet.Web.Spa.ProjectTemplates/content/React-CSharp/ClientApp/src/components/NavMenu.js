@@ -1,7 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
