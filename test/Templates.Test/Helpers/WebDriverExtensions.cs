@@ -66,5 +66,11 @@ namespace Templates.Test.Helpers
             return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutSeconds))
                 .Until(drv => searchContext.FindElement(by));
         }
+
+        public static void WaitForUrl(this IWebDriver browser, string expectedUrl)
+        {
+            new WebDriverWait(browser, TimeSpan.FromSeconds(5))
+                .Until(driver => driver.Url.Contains(expectedUrl, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

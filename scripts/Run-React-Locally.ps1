@@ -8,7 +8,7 @@ param()
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = 'Stop'
-git clean -xdf
+#git clean -xdf
 
 $projects = "$PSScriptRoot/../src/Microsoft.DotNet.Web.Spa.ProjectTemplates"
 

@@ -69,6 +69,8 @@ namespace Templates.Test.SpaTemplateTest
 
             // Can navigate to the counter page
             browser.Click(By.PartialLinkText("Counter"));
+            browser.WaitForUrl("counter");
+
             Assert.Equal("Counter", browser.GetText("h1"));
 
             // Clicking the counter button works
@@ -79,6 +81,7 @@ namespace Templates.Test.SpaTemplateTest
 
             // Can navigate to the 'fetch data' page
             browser.Click(By.PartialLinkText("Fetch data"));
+            browser.WaitForUrl("fetchdata");
             Assert.Equal("Weather forecast", browser.GetText("h1"));
 
             // Asynchronously loads and displays the table of weather forecasts

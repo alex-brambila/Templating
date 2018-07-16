@@ -31,7 +31,7 @@ html {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.close {
+button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
