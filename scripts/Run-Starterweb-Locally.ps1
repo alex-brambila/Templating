@@ -26,6 +26,23 @@ try {
         Remove-Item -Recurse -Force -Path $sqlServer
     }
 
+    $generatedProj = "Company.WebApplication1.csproj"
+    if (Test-path $generatedProj) {
+        if (-not ((Get-Content $generatedProj) -contains "<DefineConstants>")) {
+            $runtimeString = "</RuntimeFrameworkVersion>"
+            $content = (Get-Content $generatedProj).replace($runtimeString, "$runtimeString`n<DefineConstants>IndividualLocalAuth;UseLocalDB</DefineConstants>") | Set-Content $generatedProj
+        }
+        $commentedConnectionString = '//  "ConnectionStrings": {'
+
+        $connectionString = @'
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=aspnet-Company.WebApplication1-53bc9b9d-9d6a-45d4-8429-2a2761773502;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+'@
+        $appSettings = "appsettings.json"
+        (Get-Content $appSettings).replace($commentedConnectionString, $connectionString) | Set-Content $appSettings
+    }
+
     $launchSettings = "Properties\launchSettings.json"
     (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings
 
