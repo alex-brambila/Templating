@@ -14,7 +14,7 @@ namespace Templates.Test.Helpers
         // Any action will have to be completed in at most 10 seconds.
         // Providing a smaller value won't improve the speed of the tests in any
         // significant way and will make them more prone to fail on slower drivers.
-        private const int DefaultMaxWaitTimeInSeconds = 10;
+        private const int DefaultMaxWaitTimeInSeconds = 20;
 
         public static bool HostSupportsBrowserAutomation
             => string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_DISABLED")) &&
