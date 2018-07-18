@@ -43,6 +43,11 @@ try {
         (Get-Content $appSettings).replace($commentedConnectionString, $connectionString) | Set-Content $appSettings
     }
 
+    $layout = "Views/Shared/_Layout.cshtml"
+    $loginPartial = '<partial name="_LoginPartial" />'
+    $identityPartial = '<partial name="_LoginPartial.Identity" />'
+    (Get-Content $layout).Replace($loginPartial, $identityPartial) | Set-Content $layout
+
     $launchSettings = "Properties\launchSettings.json"
     (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings
 
