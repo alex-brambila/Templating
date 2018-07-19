@@ -3,7 +3,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 
@@ -32,26 +31,12 @@ namespace Templates.Test.Helpers
             // Where possible, it's preferable to use Edge because it's
             // far faster to automate than Chrome/Firefox. But on AppVeyor
             // only Firefox is available and VSTS doesn't have Edge.
-            if(UseFirefox())
-            {
-                return CreateFirefoxDriver();
-            }
-
-            var result = (IsAppVeyor || IsVSTS) ? CreateChromeDriver() : CreateEdgeDriver();
+            var result = (IsAppVeyor || IsVSTS || UseFirefox()) ? CreateFirefoxDriver() : CreateFirefoxDriver();
             result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds);
             return result;
 
             bool UseFirefox() => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_FIREFOX"));
         }
-
-        private static IWebDriver CreateChromeDriver()
-            => new ChromeDriver(
-                ChromeDriverService.CreateDefaultService(BinDir),
-                new ChromeOptions()
-                {
-                    AcceptInsecureCertificates = true
-                },
-                TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds));
 
         private static IWebDriver CreateEdgeDriver()
             => new EdgeDriver(EdgeDriverService.CreateDefaultService(BinDir));
