@@ -23,15 +23,21 @@ try {
     $launchSettings = "Properties\launchSettings.json"
     (Get-Content $launchSettings).replace('"sslPort": 0', '') | Set-Content $launchSettings
 
-    Push-Location "ClientApp"
+    dotnet publish
+    Push-Location "bin\Release\netcoreapp2.2\publish\"
     try {
-        npm install
+        Push-Location "ClientApp"
+        try {
+            npm install
+        }
+        finally {
+            Pop-Location
+        }
+        dotnet "Company.WebApplication1.dll"
     }
     finally {
         Pop-Location
     }
-
-    dotnet run
 }
 finally {
     Pop-Location
