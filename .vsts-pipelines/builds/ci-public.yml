@@ -30,38 +30,38 @@ phases:
     - powershell: Stop-Process -Id $SeleniumProcess.Id
       displayName: Stop selenium standalone
 
-- template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
-  parameters:
-    agentOs: macOS
-    beforeBuild:
-    - task: NodeTool@0
-      displayName: Use Node 8.x
-      inputs:
-        versionSpec: 8.x
-    - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
-      displayName: install certs
-    - script: npm install -g selenium-standalone
-      displayName: Install selenium
-    - script: selenium-standalone install
-      displayName: Install selenium drivers
-    - script: selenium-standalone start &; disown
-      displayName: Start selenium standalone
-    afterBuild:
-    - script: selenium-standalone stop
+- phase:
+  queue: Hosted macOS Preview
+  variables:
+    DOTNET_HOME: $(Agent.WorkFolder)/.dotnet
+  steps:
+  - task: NodeTool@0
+    displayName: Use Node 8.x
+    inputs:
+      versionSpec: 8.x
+  - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
+    displayName: install certs
+  - script: npm install -g selenium-standalone
+    displayName: Install selenium
+  - script: selenium-standalone install
+    displayName: Install selenium drivers
+  - script: selenium-standalone start & ; .\build.cmd -ci ; selenium-standalone stop
+    displayName: Start selenium standalone and run build
 
-- template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
-  parameters:
-    agentOs: Linux
-    beforeBuild:
-    - task: NodeTool@0
-      displayName: Use Node 8.x
-      inputs:
-        versionSpec: 8.x
-    - script: npm install -g selenium-standalone
-      displayName: Install selenium
-    - script: selenium-standalone install
-      displayName: Install selenium drivers
-    - powershell: Start-Process "selenium-standalone" -ArgumentList "start" -PassThru
-      displayName: Start selenium standalone &; disown
-    afterBuild:
-    - script: selenium-standalone stop
+- phase:
+  queue: Hosted Linux Preview
+  variables:
+    DOTNET_HOME: $(Agent.WorkFolder)/.dotnet
+  steps:
+  - task: NodeTool@0
+    displayName: Use Node 8.x
+    inputs:
+      versionSpec: 8.x
+  - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
+    displayName: install certs
+  - script: npm install -g selenium-standalone
+    displayName: Install selenium
+  - script: selenium-standalone install
+    displayName: Install selenium drivers
+  - script: selenium-standalone start & ; .\build.cmd -ci ; selenium-standalone stop
+    displayName: Start selenium standalone and run build
