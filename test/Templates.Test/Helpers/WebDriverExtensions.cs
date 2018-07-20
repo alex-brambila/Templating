@@ -69,7 +69,7 @@ namespace Templates.Test.Helpers
 
         public static void WaitForUrl(this IWebDriver browser, string expectedUrl)
         {
-            new WebDriverWait(browser, TimeSpan.FromSeconds(5))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(WebDriverFactory.DefaultMaxWaitTimeInSeconds))
                 .Until(driver => driver.Url.Contains(expectedUrl, StringComparison.OrdinalIgnoreCase));
         }
     }
