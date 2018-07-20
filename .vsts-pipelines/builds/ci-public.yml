@@ -44,7 +44,7 @@ phases:
       displayName: Install selenium
     - script: selenium-standalone install
       displayName: Install selenium drivers
-    - script: selenium-standalone start &
+    - script: selenium-standalone start &; disown
       displayName: Start selenium standalone
     afterBuild:
     - script: selenium-standalone stop
@@ -62,6 +62,6 @@ phases:
     - script: selenium-standalone install
       displayName: Install selenium drivers
     - powershell: Start-Process "selenium-standalone" -ArgumentList "start" -PassThru
-      displayName: Start selenium standalone
+      displayName: Start selenium standalone &; disown
     afterBuild:
     - script: selenium-standalone stop
