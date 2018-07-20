@@ -30,7 +30,7 @@ phases:
     - powershell: Stop-Process -Id $SeleniumProcess.Id
       displayName: Stop selenium standalone
 
-- phase:
+- phase: Mac
   queue: Hosted macOS Preview
   variables:
     DOTNET_HOME: $(Agent.WorkFolder)/.dotnet
@@ -45,10 +45,13 @@ phases:
     displayName: Install selenium
   - script: selenium-standalone install
     displayName: Install selenium drivers
-  - script: selenium-standalone start & ; .\build.cmd -ci ; selenium-standalone stop
+  - script: |
+      selenium-standalone start &
+      .\build.cmd -ci
+      selenium-standalone stop
     displayName: Start selenium standalone and run build
 
-- phase:
+- phase: Linux
   queue: Hosted Linux Preview
   variables:
     DOTNET_HOME: $(Agent.WorkFolder)/.dotnet
@@ -63,5 +66,8 @@ phases:
     displayName: Install selenium
   - script: selenium-standalone install
     displayName: Install selenium drivers
-  - script: selenium-standalone start & ; .\build.cmd -ci ; selenium-standalone stop
+  - script: |
+      selenium-standalone start &
+      .\build.cmd -ci
+      selenium-standalone stop
     displayName: Start selenium standalone and run build
