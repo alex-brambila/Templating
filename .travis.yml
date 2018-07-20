@@ -32,4 +32,3 @@ before_install:
 script:
 - selenium-standalone start &
 - ./build.sh
-- selenium-standalone stop
