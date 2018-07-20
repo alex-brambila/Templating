@@ -1,10 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
 
 namespace Templates.Test.Helpers
 {
@@ -25,33 +21,6 @@ namespace Templates.Test.Helpers
 
         private static bool IsVSTS
             => Environment.GetEnvironmentVariables().Contains("TF_BUILD");
-
-        public static IWebDriver CreateWebDriver()
-        {
-            // Where possible, it's preferable to use Edge because it's
-            // far faster to automate than Chrome/Firefox. But on AppVeyor
-            // only Firefox is available and VSTS doesn't have Edge.
-            var result = (IsAppVeyor || IsVSTS || UseFirefox()) ? CreateFirefoxDriver() : CreateFirefoxDriver();
-            result.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds);
-            return result;
-
-            bool UseFirefox() => !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_BROWSER_AUTOMATION_FIREFOX"));
-        }
-
-        private static IWebDriver CreateEdgeDriver()
-            => new EdgeDriver(EdgeDriverService.CreateDefaultService(BinDir));
-
-        private static IWebDriver CreateFirefoxDriver()
-            => new FirefoxDriver(
-                FirefoxDriverService.CreateDefaultService(BinDir),
-                new FirefoxOptions()
-                {
-                    AcceptInsecureCertificates = true
-                },
-                TimeSpan.FromSeconds(DefaultMaxWaitTimeInSeconds));
-
-        private static string BinDir
-            => Path.GetDirectoryName(typeof(WebDriverFactory).Assembly.Location);
 
         private static int GetWindowsVersion()
         {

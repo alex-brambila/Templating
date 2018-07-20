@@ -20,6 +20,14 @@ phases:
       displayName: Use Node 8.x
       inputs:
         versionSpec: 8.x
+    - script: npm install -g selenium-standalone
+      displayName: Install selenium
+    - script: selenium-standalone install
+      displayName: Install selenium drivers
+    - script: selenium-standalone start
+      displayName: Start selenium standalone
+    afterBuild:
+    - script: selenium-standalone stop
 
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
@@ -31,6 +39,14 @@ phases:
         versionSpec: 8.x
     - script: ./run.sh install-tools; $(Agent.WorkFolder)/.dotnet/dotnet dev-certs https
       displayName: install certs
+    - script: npm install -g selenium-standalone
+      displayName: Install selenium
+    - script: selenium-standalone install
+      displayName: Install selenium drivers
+    - script: selenium-standalone start
+      displayName: Start selenium standalone
+    afterBuild:
+    - script: selenium-standalone stop
 
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
@@ -40,3 +56,11 @@ phases:
       displayName: Use Node 8.x
       inputs:
         versionSpec: 8.x
+    - script: npm install -g selenium-standalone
+      displayName: Install selenium
+    - script: selenium-standalone install
+      displayName: Install selenium drivers
+    - script: selenium-standalone start
+      displayName: Start selenium standalone
+    afterBuild:
+    - script: selenium-standalone stop

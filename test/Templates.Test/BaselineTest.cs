@@ -4,9 +4,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Testing.xunit;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -14,7 +14,7 @@ namespace Templates.Test
 {
     public class BaselineTest : TemplateTestBase
     {
-        public BaselineTest(ITestOutputHelper output) : base(output)
+        public BaselineTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
         }
 

@@ -6,7 +6,7 @@ namespace Templates.Test.SpaTemplateTest
 {
     public class AngularTemplateTest : SpaTemplateTestBase
     {
-        public AngularTemplateTest(ITestOutputHelper output) : base(output)
+        public AngularTemplateTest(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
         }
 

@@ -8,26 +8,25 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.Extensions.CommandLineUtils;
 using Templates.Test.Helpers;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Templates.Test
 {
-    public class TemplateTestBase : IDisposable
+    public class TemplateTestBase : BrowserTestBase, IDisposable
     {
         private static object DotNetNewLock = new object();
 
         protected string ProjectName { get; set; }
         protected string ProjectGuid { get; set; }
         protected string TemplateOutputDir { get; set; }
-        protected ITestOutputHelper Output { get; private set; }
         protected bool UseRazorSdkPackage { get; set; } = true;
 
-        public TemplateTestBase(ITestOutputHelper output)
+        public TemplateTestBase(BrowserFixture browserFixture, ITestOutputHelper output) : base(browserFixture, output)
         {
             TemplatePackageInstaller.EnsureTemplatingEngineInitialized(output);
 
-            Output = output;
             ProjectGuid = Guid.NewGuid().ToString("N");
             ProjectName = $"AspNet.Template.{ProjectGuid}";
 
