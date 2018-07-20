@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Testing.xunit;
+using Templates.Test.Infrastructure;
 using Xunit;
 using Xunit.Abstractions;
 
