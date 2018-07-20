@@ -24,10 +24,11 @@ phases:
       displayName: Install selenium
     - script: selenium-standalone install
       displayName: Install selenium drivers
-    - script: selenium-standalone start
+    - powershell: $SeleniumProcess = Start-Process "selenium-standalone"  -ArgumentList "start" -PassThru
       displayName: Start selenium standalone
     afterBuild:
-    - script: selenium-standalone stop
+    - powershell: Stop-Process -Id $SeleniumProcess.Id
+      displayName: Stop selenium standalone
 
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
