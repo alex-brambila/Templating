@@ -52,6 +52,7 @@ namespace Templates.Test.SpaTemplateTest
 
                 if (WebDriverFactory.HostSupportsBrowserAutomation)
                 {
+                    aspNetProcess.VisitInBrowser(Browser);
                     TestBasicNavigation();
                 }
             }
