@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,17 +35,16 @@
 #endif*@
         </nav>
     </header>
-
-    <div class="container">
+    <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-1">
+            @RenderBody()
+        </main>
     </div>
-    <main role="main" class="container pb-1">
-        @RenderBody()
-    </main>
+
     <footer class="border-top footer pl-3 text-muted">
         &copy; Year - Company.WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
-
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
