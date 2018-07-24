@@ -6,6 +6,7 @@
     <AngleSharpPackageVersion>0.9.9</AngleSharpPackageVersion>
     <DotNetEfPackageVersion>2.2.0-preview1-34755</DotNetEfPackageVersion>
     <InternalAspNetCoreSdkPackageVersion>2.2.0-preview1-17099</InternalAspNetCoreSdkPackageVersion>
+    <MicrosoftAspNetCoreAllPackageVersion>2.2.0-preview1-34755</MicrosoftAspNetCoreAllPackageVersion>
     <MicrosoftAspNetCoreAppPackageVersion>2.2.0-preview1-34755</MicrosoftAspNetCoreAppPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>2.2.0-preview1-34755</MicrosoftAspNetCoreAuthenticationAzureADB2CUIPackageVersion>
     <MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>2.2.0-preview1-34755</MicrosoftAspNetCoreAuthenticationAzureADUIPackageVersion>
